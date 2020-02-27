@@ -18,8 +18,7 @@ public class IntArrayWorker
   public int getTotal()
   {
     int total = 0;
-    for (int row = 0; row < matrix.length; row++)
-    {
+    for (int row = 0; row < matrix.length; row++)    {
       for (int col = 0; col < matrix[0].length; col++)
       {
         total = total + matrix[row][col];
@@ -27,7 +26,28 @@ public class IntArrayWorker
     }
     return total;
   }
-  
+        public int getLargest()
+        {
+            int Largest = 0;
+            for(int i=0; i<matrix.length;i++)
+            {
+                for(int j=0;j<matrix[i].length;j++)
+                {
+                    i=j[i][j];
+                }
+            }
+            return Largest;
+        }
+           
+                    public int getColTotal(int n)
+                    {
+                        int sum = 0;
+                        for(int row=0; row<matrix.length;row++)
+                        {
+                            sum+=matix[row][n];
+                        }
+                        return sum;
+                    }
   /**
    * Method to return the total using a nested for-each loop
    * @return the total of the values in the array
