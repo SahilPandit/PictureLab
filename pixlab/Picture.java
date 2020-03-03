@@ -86,7 +86,7 @@ public class Picture extends SimplePicture
   }
   
   /** Method to set the blue to 0 */
-  public void zeroBlue()
+  public void KeepOnlyBlue()
   {
     Pixel[][] pixels = this.getPixels2D();
     for (Pixel[] rowArray : pixels)
@@ -94,6 +94,28 @@ public class Picture extends SimplePicture
       for (Pixel pixelObj : rowArray)
       {
         pixelObj.setBlue(0);
+      }
+    }
+  }
+  public void zeroRed()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setRed(0);
+      }
+    }
+  }
+  public void zeroGreen()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setGreen(0);
       }
     }
   }
@@ -178,29 +200,47 @@ public class Picture extends SimplePicture
   {
     Picture flower1 = new Picture("flower1.jpg");
     Picture flower2 = new Picture("flower2.jpg");
-    this.copy(flower1,0,0);
-    this.copy(flower2,100,0);
-    this.copy(flower1,200,0);
+   
+    //this.copy(flower1,100,0);
+    this.copy2(flower1,0,100, 0, 100);
+    //flower1.explore();
+    //this.copy(flower1,200,0);
+    // Mirroring
+    int mirrorPoint = 98;
+    Pixel rightPixel = null;
+    Pixel leftPixel = null;
+    Pixel[][] pixels = this.getPixels2D();   
+    for (int row = 0; row < 98; row++)
+    {
+      for (int col = 0; col < 88; col++)
+      {
+        rightPixel = pixels[row][col];      
+        leftPixel = pixels[mirrorPoint - row + mirrorPoint][col];
+        leftPixel.setColor(rightPixel.getColor());
+      }
+    }
     Picture flowerNoBlue = new Picture(flower2);
     flowerNoBlue.zeroBlue();
-    this.copy(flowerNoBlue,300,0);
-    this.copy(flower1,400,0);
-    this.copy(flower2,500,0);
-    this.mirrorVertical();
-    this.write("collage.jpg");
-  }
+    this.copy2(flowerNoBlue,300,350,80,500);
+    
+    Picture flowerinverse = new Picture(flower2);
+    flowerinverse.invert();
+    this.copy2(flowerinverse, 100, 300, 80, 300);
   
   
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
     */
-  public void edgeDetection(int edgeDist)
+}
+ public void edgeDetection(int edgeDist)
   {
     Pixel leftPixel = null;
     Pixel rightPixel = null;
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    
     Pixel[][] pixels = this.getPixels2D();
-    Color rightColor = null;
-    for (int row = 0; row < pixels.length; row++)
+    for (int row = 0; row < pixels.length - 1; row++)
     {
       for (int col = 0; 
            col < pixels[0].length-1; col++)
@@ -215,7 +255,8 @@ public class Picture extends SimplePicture
           leftPixel.setColor(Color.WHITE);
       }
     }
-  }
+}
+
   
   
   /* Main method for testing - each class in Java can have a main 
@@ -229,4 +270,4 @@ public class Picture extends SimplePicture
     beach.explore();
   }
   
-} // this } is the end of class Picture, put all new methods before this
+} ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// this } is the end of class Picture, put all new methods before this

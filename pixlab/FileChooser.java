@@ -98,14 +98,14 @@ public class FileChooser
    * @return the media directory
    */
   public static String getMediaDirectory() 
-  {URL
+  {
     String directory = null;
     boolean done = false;
     File dirFile = null;
     
     // try to find the images directory
       try {
-        // get the  for where we loaded this class 
+        // get the URL for where we loaded this class 
         Class currClass = Class.forName("FileChooser");
         URL classURL = currClass.getResource("FileChooser.class");
         URL fileURL = new URL(classURL,"../images/");
